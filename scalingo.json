@@ -1,16 +1,16 @@
 {
-	"name": "API Platform",
-	"repository": "https://github.com/Scalingo/api-platform",
-	"description": "REST and GraphQL framework to build modern API-driven projects (server-side only)",
+    "name": "API Platform",
+    "repository": "https://github.com/Scalingo/api-platform",
+    "description": "REST and GraphQL framework to build modern API-driven projects (server-side only)",
     "website": "https://api-platform.com/",
     "logo": "https://camo.githubusercontent.com/0c6b72c593f69a3d8bdac424b1152a73ef5b2e22/68747470733a2f2f6170692d706c6174666f726d2e636f6d2f6c6f676f2d323530783235302e706e67",
     "success_url": "/",
     "env": {
-		"APP_ENV": {
+        "APP_ENV": {
             "value": "prod",
             "description": "Environment set"
         },
-		"APP_SECRET": {
+        "APP_SECRET": {
             "generator": "secret"
         },
         "TRUSTED_HOSTS": {
@@ -18,10 +18,10 @@
             "template": "^localhost|%URL%$",
             "description": "Trusted hosts by the app"
         },
-		"CORS_ALLOW_ORIGIN": {
-			"generator": "url",
-			"template": "%URL%",
-			"description": "Contain the URL to access your app dashboard"
+        "CORS_ALLOW_ORIGIN": {
+            "generator": "url",
+            "template": "%URL%",
+            "description": "Contain the URL to access your app dashboard"
         },
         "BUILDPACK_URL": {
             "value": "https://github.com/Scalingo/php-buildpack",
@@ -31,15 +31,15 @@
             "value": "api",
             "description": "Directory deployed on the platform"
         }
-	},
-	"formation": {
-		"web": {
-			"name": 1,
-			"size": "S"
-		}
-	},
-	"addons": [
-		"postgresql:postgresql-sandbox"
+    },
+    "formation": {
+        "web": {
+            "name": 1,
+            "size": "S"
+        }
+    },
+    "addons": [
+        "postgresql:postgresql-sandbox"
     ],
     "scripts": {
         "postdeploy": "php bin/console doctrine:schema:create"
