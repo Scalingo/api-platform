@@ -10,9 +10,14 @@
             "value": "prod",
             "description": "Environment set"
         },
-		"APP_SECRET" : {
+		"APP_SECRET": {
             "generator": "secret"
-		},
+        },
+        "TRUSTED_HOSTS": {
+            "generator": "url",
+            "template": "^localhost|%URL%$",
+            "description": "Trusted hosts by the app"
+        },
 		"CORS_ALLOW_ORIGIN": {
 			"generator": "url",
 			"template": "%URL%",
@@ -22,7 +27,7 @@
             "value": "https://github.com/Scalingo/php-buildpack",
             "description": "Buildpack used by this app"
         },
-        "PROJECT_DIR":{
+        "PROJECT_DIR": {
             "value": "api",
             "description": "Directory deployed on the platform"
         }
