@@ -14,7 +14,7 @@
             "generator": "secret"
         },
         "TRUSTED_HOSTS": {
-            "generator": "url",
+            "generator": "template",
             "template": "^localhost|%APP_HOSTNAME%$",
             "description": "Trusted hosts by the app"
         },
