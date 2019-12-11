@@ -15,7 +15,7 @@
         },
         "TRUSTED_HOSTS": {
             "generator": "url",
-            "template": "^localhost|%URL%$",
+            "template": "^localhost|%APP_HOSTNAME%$",
             "description": "Trusted hosts by the app"
         },
         "CORS_ALLOW_ORIGIN": {
