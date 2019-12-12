@@ -1,16 +1,6 @@
-# the different stages of this Dockerfile are meant to be built into separate images
-# https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
-# https://docs.docker.com/compose/compose-file/#target
+# Scalingo Dockerfile for local dev environment
 
-
-# https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION=7.3
-ARG NGINX_VERSION=1.17
-ARG VARNISH_VERSION=6.3
-
-
-# "php" stage
-FROM php:${PHP_VERSION}-fpm-alpine AS api_platform_php
+FROM php:7-fpm-alpine
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -22,6 +12,7 @@ RUN apk add --no-cache \
 	;
 
 ARG APCU_VERSION=5.1.18
+
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
@@ -31,7 +22,7 @@ RUN set -eux; \
 		zlib-dev \
 	; \
 	\
-	docker-php-ext-configure zip --with-libzip; \
+	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
 		pdo_pgsql \
@@ -117,23 +108,3 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
-
-
-# "nginx" stage
-# depends on the "php" stage above
-FROM nginx:${NGINX_VERSION}-alpine AS api_platform_nginx
-
-COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
-
-WORKDIR /srv/api/public
-
-COPY --from=api_platform_php /srv/api/public ./
-
-
-# "varnish" stage
-# does not depend on any of the above stages, but placed here to keep everything in one Dockerfile
-FROM varnish:${VARNISH_VERSION} AS api_platform_varnish
-
-COPY docker/varnish/conf/default.vcl /etc/varnish/default.vcl
-
-CMD ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_resp_hdr_len=65536", "-p", "http_resp_size=98304"]

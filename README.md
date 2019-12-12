@@ -1,5 +1,27 @@
 <h1 align="center"><a href="https://api-platform.com"><img src="https://api-platform.com/logo-250x250.png" alt="API Platform"></a></h1>
 
+# Scalingo API-Platform
+
+This is a fork of the [original project](https://github.com/api-platform/api-platform), this fork is compatible with [Scalingo](https://scalingo.com) for one click deployment.
+
+This one-click deployment, `only deploy` the [API service](https://api-platform.com/docs/core/) of API-Platform, it doesn't deploy the [Admin interface](https://api-platform.com/docs/admin/) and the [Client interface build with generator](https://api-platform.com/docs/client-generator/).
+
+## Features
+
+- Compatible with [Scalingo PHP Buildpack](https://github.com/Scalingo/php-buildpack)
+- Logs output from Symfony is available with the addition of [monolog bundle](https://github.com/Seldaek/monolog) package and use of `php://stderr`
+- Mercure and Varnish integrations disabled by default
+
+Actual API-Platform version: `2.5.3`
+
+## Installation
+
+### One-click installation
+
+[![Deploy to Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy?source=https://github.com/Scalingo/api-platform)
+
+---
+
 API Platform is a next-generation web framework designed to easily create API-first projects without compromising extensibility
 and flexibility:
 
