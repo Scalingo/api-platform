@@ -1,3 +1,7 @@
+## Deprecation
+
+This repository is now archived (since 2025-12-24).
+
 <h1 align="center"><a href="https://api-platform.com"><img src="https://api-platform.com/logo-250x250.png" alt="API Platform"></a></h1>
 
 # Scalingo API-Platform
